@@ -1,39 +1,65 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-import java.util.Scanner;
+
+
+class Tree {
+    protected double height;
+    protected double width;
+    public Tree(double trunk1) {
+        this(trunk1, trunk1);
+    }
+    public Tree(double h, double width) {
+        height = h;
+        this.width = width;
+    }
+
+
+
+    public double calculateCanopy() {
+        return height * width;
+    }
+
+    public void showDetails() {
+        System.out.println("Tree:");
+        System.out.println("Height: " + height);
+        System.out.println("Width: " + width);
+        System.out.println("Canopy Area: " + calculateCanopy());
+
+    }
+}
+
+class Oak extends Tree {
+    public Oak(double trunk) {
+        super(trunk);
+    }
+
+    public Oak(double height, double width) {
+        super(height, width);
+    }
+
+    public double calculateRootSpread() {
+        return 0.75 * (height + width);
+    }
+
+    @Override
+    public void showDetails() {
+        super.showDetails();
+        System.out.println("Root Spread: " + calculateRootSpread());
+        System.out.println();
+    }
+}
 public class Main {
     public static void main(String[] args) {
-       Scanner scanner= new Scanner(System.in);
-        System.out.println("introduceti textul");
-       String text=scanner.nextLine();
 
-        String[] cuvinte = text.split("[^a-zA-ZăâîșțĂÂÎȘȚ]+");
-        String[] cuvinteUnice = new String[cuvinte.length]; // Alocare array pentru cuvintele unice
-        int index = 0; // Indexul pentru cuvintele unice
+        Tree tree = new Tree(5, 3);
 
-        for (String cuvant : cuvinte) {
-            if (cuvant.length() > 1 && cuvant.charAt(0) == cuvant.charAt(cuvant.length() - 1)) {
-                // Verifica daca cuvantul este unic
-                if (!contains(cuvinteUnice, cuvant.toLowerCase(), index)) {
-                    cuvinteUnice[index++] = cuvant.toLowerCase();
-                }
-            }
-        }
+        Oak oakTree = new Oak(4);
 
-        System.out.println("Cuvintele din text care incep si se termina cu aceeasi litera, fara repetare:");
+        Oak OakTree1 = new Oak(8, 3);
 
-        // Afisare cuvinte unice
-        for (int i = 0; i < index; i++) {
-            System.out.println(cuvinteUnice[i]);
-        }
-    }
-    // Metoda pentru verificarea existentei unui cuvant intr-un array
-    public static boolean contains(String[] array, String cuvant, int index) {
-        for (int i = 0; i < index; i++) {
-            if (array[i] != null && array[i].equals(cuvant)) {
-                return true;
-            }
-        }
-        return false;
+        Tree Tree1 = new Oak(6);
+
+        tree.showDetails();
+        oakTree.showDetails();
+        OakTree1.showDetails();
+        Tree1.showDetails();
     }
 }
